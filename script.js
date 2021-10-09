@@ -56,7 +56,7 @@ function updateScreen(buttonValue) {
     }
     displayValue = screen[0].textContent;
 }
-
+//clears screen after entering operator button
 function clearScreen(buttonValue) {
     if (buttonValue == "C") {
         resetCalculator();
@@ -73,6 +73,7 @@ function resetCalculator() {
     hiddenValue = 0;
     currentOperator = 0;
     screen[0].textContent = 0;
+    wholeOperation = 0;
 }
 // console.log(operate("+", 2, 2));
 // console.log(operate("-", 6, 3));
@@ -83,6 +84,8 @@ function resetCalculator() {
 let displayValue = 0;
 let hiddenValue = 0;
 let currentOperator = "";
+let wholeOperation = 0;
+let newSect = false;
 const numericButtons = [];
 const operatorButtons = [];
 const actionButtons = [];
@@ -122,13 +125,24 @@ buttonHolder.forEach((button) => {
 //on every numeric button click update screen value
 numericButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
+        if (newSect) clearScreen(button.textContent);
         updateScreen(button.textContent);
     });
 });
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        clearScreen(button.textContent);
+        if (currentOperator == "") {
+            clearScreen(button.textContent);
+        } else {
+            screen[0].textContent = operate(
+                currentOperator,
+                parseFloat(hiddenValue),
+                parseFloat(displayValue)
+            );
+            wholeOperation = screen[0].textContent;
+            newSect = true;
+        }
     });
 });
 
@@ -140,7 +154,7 @@ actionButtons.forEach((button) => {
                 parseFloat(hiddenValue),
                 parseFloat(displayValue)
             );
-            displayValue = screen[0].textContent;
+            hiddenValue = screen[0].textContent;
         } else if (button.textContent == ".") {
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
