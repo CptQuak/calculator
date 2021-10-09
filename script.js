@@ -19,6 +19,7 @@ function divide(a, b) {
     }
 }
 function operate(operator, a, b) {
+    newSect = true;
     switch (operator) {
         case "+":
             return add(a, b);
@@ -125,33 +126,61 @@ buttonHolder.forEach((button) => {
 //on every numeric button click update screen value
 numericButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-        if (newSect) clearScreen(button.textContent);
+        if (newSect) {
+            newSect = false;
+            screen[0].textContent = 0;
+        }
+
         updateScreen(button.textContent);
+        console.log(displayValue);
     });
 });
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (currentOperator == "") {
-            clearScreen(button.textContent);
-        } else {
-            screen[0].textContent = operate(
-                currentOperator,
-                parseFloat(hiddenValue),
-                parseFloat(displayValue)
-            );
             wholeOperation = screen[0].textContent;
+            displayValue = screen[0].textContent;
+            currentOperator = button.textContent;
             newSect = true;
+        } else if (!currentOperator == "") {
+            currentOperator = button.textContent;
+            if (newSect) {
+                screen[0].textContent = operate(
+                    currentOperator,
+                    parseFloat(wholeOperation),
+                    parseFloat(displayValue)
+                );
+                wholeOperation = screen[0].textContent;
+            }
         }
+
+        // if (currentOperator == "") {
+        //     clearScreen(button.textContent);
+        // } else {
+        //     if (!newSect) {
+        //         currentOperator = button.textContent;
+        //         screen[0].textContent = operate(
+        //             currentOperator,
+        //             parseFloat(hiddenValue),
+        //             parseFloat(displayValue)
+        //         );
+        //     }
+        //     wholeOperation = screen[0].textContent;
+        console.log("---------");
+        console.log(displayValue);
+        console.log(wholeOperation);
+        console.log(currentOperator);
+        // }
     });
 });
-
+//works for now
 actionButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.textContent == "=" && !currentOperator == "") {
             screen[0].textContent = operate(
                 currentOperator,
-                parseFloat(hiddenValue),
+                parseFloat(wholeOperation),
                 parseFloat(displayValue)
             );
             hiddenValue = screen[0].textContent;
