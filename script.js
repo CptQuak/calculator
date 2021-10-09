@@ -61,12 +61,13 @@ function updateScreen(buttonValue) {
 function clearScreen(buttonValue) {
     if (buttonValue == "C") {
         resetCalculator();
-    } else {
-        hiddenValue = displayValue;
-        currentOperator = buttonValue;
-        screen[0].textContent = 0;
-        displayValue = screen[0].textContent;
     }
+    // else {
+    //     hiddenValue = displayValue;
+    //     currentOperator = buttonValue;
+    //     screen[0].textContent = 0;
+    //     displayValue = screen[0].textContent;
+    // }
 }
 
 function resetCalculator() {
@@ -183,7 +184,7 @@ actionButtons.forEach((button) => {
                 parseFloat(wholeOperation),
                 parseFloat(displayValue)
             );
-            hiddenValue = screen[0].textContent;
+            wholeOperation = screen[0].textContent;
         } else if (button.textContent == ".") {
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
