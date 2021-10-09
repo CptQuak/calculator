@@ -27,7 +27,7 @@ body {
 
 .wrapper {
     min-height: 50%;
-    min-width: 50%;
+    width: 332px;
     /* upper to delte */
     background: #56ccf2; /* fallback for old browsers */
     background: -webkit-linear-gradient(
@@ -45,6 +45,7 @@ body {
 }
 
 .screen {
+    border: 1px solid black;
     padding: 0.5rem;
     background-color: blueviolet;
     border-radius: 10px;
@@ -53,8 +54,11 @@ body {
     align-items: center;
     margin-bottom: 1rem;
 }
-.screen > h1 {
+.screen > h2 {
     /* font to fill */
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
 }
 .buttonpanel {
     display: grid;
@@ -74,6 +78,8 @@ body {
     padding: 1rem;
     background-color: blueviolet;
     color: white;
+    font-size: 1.5rem;
+    border-radius: 10px;
 }
 .equals {
     grid-area: equals;
