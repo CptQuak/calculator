@@ -141,33 +141,17 @@ operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (currentOperator == "") {
             wholeOperation = screen[0].textContent;
-            displayValue = screen[0].textContent;
             currentOperator = button.textContent;
             newSect = true;
         } else if (!currentOperator == "") {
             currentOperator = button.textContent;
-            if (newSect) {
-                screen[0].textContent = operate(
-                    currentOperator,
-                    parseFloat(wholeOperation),
-                    parseFloat(displayValue)
-                );
-                wholeOperation = screen[0].textContent;
-            }
+            wholeOperation = operate(
+                currentOperator,
+                parseFloat(wholeOperation),
+                parseFloat(displayValue)
+            );
         }
 
-        // if (currentOperator == "") {
-        //     clearScreen(button.textContent);
-        // } else {
-        //     if (!newSect) {
-        //         currentOperator = button.textContent;
-        //         screen[0].textContent = operate(
-        //             currentOperator,
-        //             parseFloat(hiddenValue),
-        //             parseFloat(displayValue)
-        //         );
-        //     }
-        //     wholeOperation = screen[0].textContent;
         console.log("---------");
         console.log(displayValue);
         console.log(wholeOperation);
@@ -179,12 +163,14 @@ operatorButtons.forEach((button) => {
 actionButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.textContent == "=" && !currentOperator == "") {
-            screen[0].textContent = operate(
+            wholeOperation = operate(
                 currentOperator,
                 parseFloat(wholeOperation),
                 parseFloat(displayValue)
             );
-            wholeOperation = screen[0].textContent;
+            displayValue = 0;
+            currentOperator = "";
+            screen[0].textContent = wholeOperation;
         } else if (button.textContent == ".") {
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
