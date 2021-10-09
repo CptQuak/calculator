@@ -40,22 +40,21 @@ function operate(operator, a, b) {
 
 function updateScreen(buttonValue) {
     //empty screen and dot pressed start wrigin float number
-    if (buttonValue == "." && screen[0].textContent == 0) {
-        screen[0].textContent = "0.";
-    } //updating screen for float number that is starting with 0
-    else if (
-        screen[0].textContent[0] == "0" &&
-        screen[0].textContent[1] == "."
-    ) {
-        screen[0].textContent += `${buttonValue}`;
-    } //entering value greater than 0
-    else if (screen[0].textContent == 0) {
-        screen[0].textContent = buttonValue;
-    } //updating screen with next numbers if first entered number is not 0
-    else {
-        screen[0].textContent += +`${buttonValue}`;
+
+    if (screen[0].textContent.length < 15) {
+        if (buttonValue == "." && screen[0].textContent == "0") {
+            screen[0].textContent += `${buttonValue}`;
+        } else {
+            if (screen[0].textContent != "0") {
+                screen[0].textContent += `${buttonValue}`;
+            }
+            if (buttonValue != "0" && screen[0].textContent == "0") {
+                screen[0].textContent = `${buttonValue}`;
+            }
+        }
+
+        displayValue = screen[0].textContent;
     }
-    displayValue = screen[0].textContent;
 }
 
 function updateState(operatorState) {
@@ -67,6 +66,7 @@ function updateState(operatorState) {
     screen[0].textContent = wholeOperation;
     currentOperator = operatorState;
     displayValue = wholeOperation;
+    if (Number.isInteger(displayValue)) displayFloat();
 }
 
 //clears screen after entering operator button
@@ -80,8 +80,14 @@ function resetCalculator() {
     currentOperator = 0;
     screen[0].textContent = 0;
     wholeOperation = 0;
+    isDisplayFloat = false;
 }
 
+function displayFloat() {
+    isDisplayFloat = !isDisplayFloat;
+}
+
+let isDisplayFloat = false;
 let displayValue = 0;
 let hiddenValue = 0;
 let currentOperator = "";
@@ -161,7 +167,8 @@ actionButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.textContent == "=" && !currentOperator == "") {
             updateState("");
-        } else if (button.textContent == ".") {
+        } else if (!isDisplayFloat && button.textContent == ".") {
+            displayFloat();
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
             clearScreen(button.textContent);
