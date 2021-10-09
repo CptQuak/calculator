@@ -66,6 +66,7 @@ function updateState(operatorState) {
     );
     screen[0].textContent = wholeOperation;
     currentOperator = operatorState;
+    displayValue = wholeOperation;
 }
 
 //clears screen after entering operator button
@@ -118,6 +119,8 @@ buttonHolder.forEach((button) => {
         case "=":
         case "C":
         case ".":
+        case "<-":
+        case "+/-":
             actionButtons.push(button);
             break;
     }
@@ -146,10 +149,10 @@ operatorButtons.forEach((button) => {
         } else {
             updateState(button.textContent);
         }
-        console.log("---------");
-        console.log(displayValue);
-        console.log(wholeOperation);
-        console.log(currentOperator);
+        // console.log("---------");
+        // console.log(displayValue);
+        // console.log(wholeOperation);
+        // console.log(currentOperator);
         // }
     });
 });
@@ -162,6 +165,25 @@ actionButtons.forEach((button) => {
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
             clearScreen(button.textContent);
+        } else if (button.textContent == "<-") {
+            console.log("---------");
+            console.log(displayValue);
+            console.log(wholeOperation);
+            if (displayValue != 0) {
+                if (displayValue < 10 && displayValue > -10) {
+                    displayValue = 0;
+                    screen[0].textContent = displayValue;
+                } else {
+                    displayValue = displayValue.substring(
+                        0,
+                        displayValue.length - 1
+                    );
+                    screen[0].textContent = displayValue;
+                }
+            }
+        } else if (button.textContent == "+/-") {
+            displayValue = displayValue * -1;
+            screen[0].textContent = displayValue;
         }
     });
 });
