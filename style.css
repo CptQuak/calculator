@@ -26,37 +26,50 @@ body {
 }
 
 .wrapper {
-    min-height: 50%;
     width: 332px;
     /* upper to delte */
-    background: #56ccf2; /* fallback for old browsers */
+    background: #0f0c29; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,
-        #2f80ed,
-        #56ccf2
+        #24243e,
+        #302b63,
+        #0f0c29
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
         to right,
-        #2f80ed,
-        #56ccf2
+        #24243e,
+        #302b63,
+        #0f0c29
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: 1px solid wheat;
     border-radius: 10px;
     padding: 0.5rem;
 }
 
 .screen {
-    border: 1px solid black;
+    border: 1px solid wheat;
     padding: 0.5rem;
-    background-color: blueviolet;
+
     border-radius: 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 1rem;
+    background: #636363; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #a2ab58,
+        #636363
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #a2ab58,
+        #636363
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .screen > h2 {
     /* font to fill */
-    color: white;
+    color: #eee;
     font-size: 2rem;
     font-weight: 500;
 }
@@ -73,17 +86,60 @@ body {
     gap: 0.5rem;
 }
 .buttonpanel > * {
-    border: 1px solid black;
     text-align: center;
+    border: 1px solid wheat;
     padding: 1rem;
-    background-color: blueviolet;
-    color: white;
+    color: #eee;
     font-size: 1.5rem;
     border-radius: 10px;
+    background: #636363; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #a2ab58,
+        #636363
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #a2ab58,
+        #636363
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-weight: 500;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 .equals {
     grid-area: equals;
 }
-.disable {
-    background-color: gray;
+.operators {
+    background: #23074d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #cc5333,
+        #23074d
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #cc5333,
+        #453e4e
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.special {
+    background: #ad5389; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #af9fb8,
+        #ad5389
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #504357,
+        #ad5389
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.buttonpanel > *:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+.buttonpanel > *:active {
+    transform: scale(0.9);
 }
