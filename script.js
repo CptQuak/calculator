@@ -57,6 +57,17 @@ function updateScreen(buttonValue) {
     }
     displayValue = screen[0].textContent;
 }
+
+function updateState(operatorState) {
+    wholeOperation = operate(
+        currentOperator,
+        parseFloat(wholeOperation),
+        parseFloat(displayValue)
+    );
+    screen[0].textContent = wholeOperation;
+    currentOperator = operatorState;
+}
+
 //clears screen after entering operator button
 function clearScreen(buttonValue) {
     resetCalculator();
@@ -118,7 +129,6 @@ numericButtons.forEach((button) => {
             newSect = false;
             screen[0].textContent = 0;
         }
-
         updateScreen(button.textContent);
         console.log(displayValue);
     });
@@ -134,13 +144,7 @@ operatorButtons.forEach((button) => {
             screen[0].textContent = wholeOperation;
             currentOperator = button.textContent;
         } else {
-            wholeOperation = operate(
-                currentOperator,
-                parseFloat(wholeOperation),
-                parseFloat(displayValue)
-            );
-            screen[0].textContent = wholeOperation;
-            currentOperator = button.textContent;
+            updateState(button.textContent);
         }
         console.log("---------");
         console.log(displayValue);
@@ -153,12 +157,7 @@ operatorButtons.forEach((button) => {
 actionButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.textContent == "=" && !currentOperator == "") {
-            wholeOperation = operate(
-                currentOperator,
-                parseFloat(wholeOperation),
-                parseFloat(displayValue)
-            );
-            screen[0].textContent = wholeOperation;
+            updateState("");
         } else if (button.textContent == ".") {
             updateScreen(button.textContent);
         } else if (button.textContent == "C") {
