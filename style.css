@@ -84,3 +84,6 @@ body {
 .equals {
     grid-area: equals;
 }
+.disable {
+    background-color: gray;
+}
