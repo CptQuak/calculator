@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
 }
 body {
     height: 100vh;
@@ -26,7 +27,7 @@ body {
 
 .wrapper {
     min-height: 50%;
-    min-width: 20%;
+    min-width: 50%;
     /* upper to delte */
     background: #56ccf2; /* fallback for old browsers */
     background: -webkit-linear-gradient(
@@ -50,7 +51,30 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-bottom: 1rem;
 }
 .screen > h1 {
     /* font to fill */
+}
+.buttonpanel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+        ". . . ."
+        ". . . ."
+        ". . . ."
+        ". . . ."
+        ". . equals equals";
+    gap: 0.5rem;
+}
+.buttonpanel > * {
+    border: 1px solid black;
+    text-align: center;
+    padding: 1rem;
+    background-color: blueviolet;
+    color: white;
+}
+.equals {
+    grid-area: equals;
 }
