@@ -59,15 +59,7 @@ function updateScreen(buttonValue) {
 }
 //clears screen after entering operator button
 function clearScreen(buttonValue) {
-    if (buttonValue == "C") {
-        resetCalculator();
-    }
-    // else {
-    //     hiddenValue = displayValue;
-    //     currentOperator = buttonValue;
-    //     screen[0].textContent = 0;
-    //     displayValue = screen[0].textContent;
-    // }
+    resetCalculator();
 }
 
 function resetCalculator() {
@@ -77,11 +69,6 @@ function resetCalculator() {
     screen[0].textContent = 0;
     wholeOperation = 0;
 }
-// console.log(operate("+", 2, 2));
-// console.log(operate("-", 6, 3));
-// console.log(operate("*", 2, 7));
-// console.log(operate("/", 10, 3));
-// console.log(operate("/", 2, 0));
 
 let displayValue = 0;
 let hiddenValue = 0;
@@ -143,15 +130,18 @@ operatorButtons.forEach((button) => {
             wholeOperation = screen[0].textContent;
             currentOperator = button.textContent;
             newSect = true;
-        } else if (!currentOperator == "") {
+        } else if (currentOperator != button.textContent) {
+            screen[0].textContent = wholeOperation;
             currentOperator = button.textContent;
+        } else {
             wholeOperation = operate(
                 currentOperator,
                 parseFloat(wholeOperation),
                 parseFloat(displayValue)
             );
+            screen[0].textContent = wholeOperation;
+            currentOperator = button.textContent;
         }
-
         console.log("---------");
         console.log(displayValue);
         console.log(wholeOperation);
@@ -168,8 +158,6 @@ actionButtons.forEach((button) => {
                 parseFloat(wholeOperation),
                 parseFloat(displayValue)
             );
-            displayValue = 0;
-            currentOperator = "";
             screen[0].textContent = wholeOperation;
         } else if (button.textContent == ".") {
             updateScreen(button.textContent);
